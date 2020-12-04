@@ -82,7 +82,10 @@ public class Game : MonoBehaviour {
                 if (runner.transform.position.y < -0.5f) {
                     runner.GetComponent<Rigidbody>().AddForce(Vector3.up * jumpForce, ForceMode.Impulse);                    
                 }
-
+            }
+            if (gesture.DeltaY < 0) {
+                Debug.Log("ROLL!!");
+                runner.GetComponentInChildren<Animator>().SetTrigger("Roll");
             }
         }
     }
