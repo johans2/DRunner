@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DigitalRubyShared;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = System.Random;
 
 public class Game : MonoBehaviour {
@@ -28,6 +29,9 @@ public class Game : MonoBehaviour {
     private int numGroundTiles = 8;
     private int delayframesatstart = 5;
 
+    public void OnRestartGame () {
+        SceneManager.LoadScene(0);
+    }
 
     private void Awake() {
         var tileList = new List<GameObject>();
@@ -45,7 +49,7 @@ public class Game : MonoBehaviour {
             tilePool.Enqueue(tileList[i]);
         }
 
-        Physics.gravity *= 2f;
+        Physics.gravity = Vector3.one * -9.82f * 2f;
     }
     
     void Start() {
