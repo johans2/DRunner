@@ -48,7 +48,6 @@ public class Game : MonoBehaviour {
         Physics.gravity *= 2f;
     }
     
-
     void Start() {
         for (int i = 0; i < numGroundTiles; i++) {
             var tile = tilePool.Dequeue();
