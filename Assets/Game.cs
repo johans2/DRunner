@@ -33,6 +33,14 @@ public class Game : MonoBehaviour {
         SceneManager.LoadScene(0);
     }
 
+    public void OnFireA () {
+        Debug.Log("FIRE A");
+    }
+
+    public void OnFireB () {
+        Debug.Log("FIRE B");
+    }
+
     private void Awake() {
         var tileList = new List<GameObject>();
         for (int i = 0; i < tilesTypes.Length; i++) {
