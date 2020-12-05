@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 651ec315353d7b14e8cebdf5e02089d2
+=======
+guid: 1784720245eca0b4b925ba1415a5065f
+>>>>>>> dc864906a901e0ceebb504378da054cb13c08dc2
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable:
@@ -88,12 +92,20 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
+<<<<<<< HEAD
   lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: b8e910d726c6be046826fbf2aa399163,
     type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
   avatarSetup: 2
+=======
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+>>>>>>> dc864906a901e0ceebb504378da054cb13c08dc2
   additionalBone: 0
   userData: 
   assetBundleName: 
