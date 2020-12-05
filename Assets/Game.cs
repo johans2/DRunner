@@ -75,21 +75,61 @@ public class Game : MonoBehaviour {
     
     private void SwipeGestureCallback(GestureRecognizer gesture)
     {
-        if (gesture.State == GestureRecognizerState.Ended)
-        {
-            if (gesture.DeltaY > 0) {
-                Debug.Log("JUMP!!");
-                if (runner.transform.position.y < -0.5f) {
-                    runner.GetComponent<Rigidbody>().AddForce(Vector3.up * jumpForce, ForceMode.Impulse);                    
+        if (gesture.State == GestureRecognizerState.Ended) {
+            float jumpOrRoll = Math.Abs(gesture.DeltaY);
+            float stabOrBlock = Math.Abs(gesture.DeltaX);
+
+            if (jumpOrRoll > stabOrBlock) {
+                
+                if (gesture.DeltaY > 0.1) {
+                    Debug.Log("JUMP!!");
+                    if (runner.transform.position.y < -0.5f) {
+                        runner.GetComponent<Rigidbody>().AddForce(Vector3.up * jumpForce, ForceMode.Impulse);                    
+                    }
                 }
+                if (gesture.DeltaY < -0.1) {
+                    Debug.Log("ROLL!!");
+                    runner.GetComponentInChildren<Animator>().SetTrigger("Roll");
+                }    
+            }else {
+                if (gesture.DeltaX > 0.1) {
+                    Debug.Log("STAB!!");
+                    if (!stabbing) {
+                        runner.GetComponentInChildren<Animator>().SetTrigger("Dash");
+                        StartCoroutine(DoStabMove());
+                    }
+
+                }                
             }
-            if (gesture.DeltaY < 0) {
-                Debug.Log("ROLL!!");
-                runner.GetComponentInChildren<Animator>().SetTrigger("Roll");
-            }
+
+
+
         }
     }
-    
+
+    private bool stabbing = false;
+    public IEnumerator DoStabMove() {
+        stabbing = true;
+        float stabRange = 0.75f;
+        float stabTime = 0.3f;
+        float elapsedTime = 0;
+        Vector3 startpos = runner.transform.position;
+        while (elapsedTime <= stabTime) {
+            elapsedTime += Time.deltaTime;
+            runner.transform.position = Vector3.Lerp(startpos, startpos + new Vector3(stabRange, 0, 0), elapsedTime / stabTime);
+            yield return null;
+        }
+
+        elapsedTime = 0;
+        while (elapsedTime <= stabTime) {
+            elapsedTime += Time.deltaTime;
+            runner.transform.position = Vector3.Lerp(startpos + new Vector3(stabRange, 0, 0),startpos, elapsedTime / stabTime);
+            yield return null;
+        }
+
+        stabbing = false;
+    }
+
     void Update() {
         delayframesatstart--;
         if (delayframesatstart > 0) {
